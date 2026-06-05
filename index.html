@@ -21,15 +21,16 @@
 
   /* ── 헤더 ── */
   .rpt-header{padding:.85rem 1rem .85rem;border-bottom:1px solid var(--border);background:var(--bg2)}
-  .rpt-date{font-size:15px;font-weight:700;color:var(--text1);margin-bottom:6px;letter-spacing:-.01em}
-  .rpt-meta{font-size:11px;color:var(--text3);line-height:1.85}
+  .rpt-date{font-size:20px;font-weight:700;color:var(--text1);margin-bottom:8px;letter-spacing:-.02em}
+  .rpt-meta{font-size:13px;color:var(--text2);line-height:1.85;margin-top:4px}
   .rpt-meta span{display:block}
-  .rpt-meta b{color:var(--text2);font-weight:600}
+  .rpt-meta b{color:var(--text1);font-weight:700}
+  .rpt-warn{font-size:12px;color:#92600a;margin-top:8px;line-height:1.6}
 
   /* ── 공통 ── */
   .divider{height:1px;background:var(--border);margin:1rem 0}
   .divider-sm{height:1px;background:var(--border);margin:.6rem 0}
-  .sec-wrap{padding:1.25rem 1rem}
+  .sec-wrap{padding:1.25rem 1rem;background:var(--bg2)}
   .sec-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
   .sec-title{font-size:17px;font-weight:700;letter-spacing:-.01em;margin-bottom:.85rem}
   .panel{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1rem}
@@ -41,7 +42,7 @@
   .scroll-tbl thead th{position:sticky;top:0;z-index:1}
 
   /* ── 보고서 요약 ── */
-  .summary-wrap{padding:1.25rem 1rem;background:var(--bg2);border-bottom:1px solid var(--border)}
+  .summary-wrap{padding:1.25rem 1rem;background:var(--bg2)}
   .kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
   .kpi{background:var(--bg3);border-radius:10px;padding:.85rem .9rem}
   .kpi-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
@@ -50,7 +51,6 @@
   .kpi-val.down{color:var(--neg)}
 
   /* ── 경고 배너 ── */
-  .warn-banner{background:#fff8e1;border-radius:8px;padding:8px 10px;margin-bottom:.85rem;font-size:12px;color:#92600a;line-height:1.6}
 
   /* ── 시사점 ── */
   .insight-row{margin-bottom:.85rem}
@@ -60,10 +60,10 @@
   .icon-red{background:#fde8e8;color:var(--neg)}
   .icon-yellow{background:#fff3e0;color:var(--warn)}
   .icon-blue{background:#e8f0fe;color:var(--accent)}
-  .insight-body{font-size:13px;color:var(--text2);line-height:1.85;margin-bottom:.5rem}
-  .strat-wrap{border-left:2px solid var(--border2);padding-left:10px;margin-top:6px}
-  .strat-quote{font-size:12px;color:var(--text3);background:var(--bg3);border-radius:6px;padding:8px 10px;margin-bottom:6px;line-height:1.7;font-style:italic}
-  .strat-body{font-size:12px;color:var(--text2);line-height:1.75}
+  .insight-body{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:.4rem}
+  .strat-wrap{margin-top:6px}
+  .strat-quote{font-size:12px;color:var(--text3);line-height:1.7;font-style:italic;margin-bottom:4px;padding-left:8px;border-left:2px solid var(--border2)}
+  .strat-body{font-size:12px;color:var(--text2);line-height:1.75;margin-top:5px}
 
   /* ── 섹션 해석 바 ── */
   .insight-bar{background:var(--bg3);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:.85rem 1rem;font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:.85rem}
@@ -110,7 +110,7 @@
   .post-link{font-size:13px;color:var(--accent);text-decoration:none;display:block;text-align:right;padding-top:4px}
 
   /* ── 섹션 구분 ── */
-  .sec-divider{height:8px;background:var(--bg3);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .sec-divider{height:1px;background:var(--border);margin:0}
 </style>
 </head>
 <body>
@@ -120,10 +120,8 @@
   <p class="rpt-date">2026년 6월 3일 (수)</p>
   <div class="rpt-meta">
     <span><b>채널</b> 인스타그램 · 언론사뉴스 · 다음뉴스 · 네이버블로그 · 커뮤니티 · 네이버뉴스 · 유튜브</span>
-    <span><b>채널별 추이·구성 비율</b> 7채널 전체 수치 (인스타그램 글로벌 팬덤 게시물 포함)</span>
-    <span><b>연관어</b> 7채널 합산</span>
-    <span><b>원문</b> 인스타그램(좋아요순) · 블로그·커뮤니티·언론사뉴스 전수 분석</span>
   </div>
+  <p class="rpt-warn">⚠ 당일 전체 언급량 36건으로 절대 수치가 적습니다. 아래 시사점은 데이터 내 확인된 패턴 기반이나, 소량 데이터 특성상 참고 수준으로 활용하시기 바랍니다.</p>
 </div>
 
 <!-- 보고서 요약 -->
@@ -151,49 +149,32 @@
     </div>
   </div>
 
-  <div class="warn-banner">⚠ 당일 전체 언급량 36건으로 절대 수치가 적습니다. 아래 시사점은 데이터 내 확인된 패턴 기반이나, 소량 데이터 특성상 참고 수준으로 활용하시기 바랍니다.</div>
 
   <!-- 시사점 1 -->
   <div class="insight-row">
-    <p class="insight-title"><span class="icon icon-red">↓</span>채널별 언급량 — 06.01 급등 이후 감소, 블로그에서 내돈내산 맛 비교 후기 본격 시작</p>
-    <p class="insight-body">06.01 최고점(613건) 대비 06.03은 36건으로 94.1% 감소했다. 인스타그램(17건·47.2%)이 최다이나 06.02(42건) 대비 59.5% 추가 감소했다. 블로그(8건)·커뮤니티(7건)는 상대적으로 낙폭이 작으며, 블로그 원문 8건 중 5건이 내돈내산 구매 후기로 "불닭볶음면보다 덜 맵고 달달, 후추 베이스 떡볶이 좋아하면 무조건 추천"(블랙패퍼), "봉골레 마늘향·해산물 감칠맛 은근하게 올라와 꽤 괜찮고"(봉골레) 등 맛에 대한 구체적 평가가 처음 등장했다. 화제성 버즈가 소진되는 사이 실소비 단계 진입이 시작됐다.</p>
-    <div class="strat-wrap">
-      <p class="strat-quote">"BTS 이름을 걸고 만든 만큼 실망시키지 않는 퀄리티. 신전떡볶이 같은 후추 베이스 좋아하시는 분들이라면 무조건 추천합니다." — 네이버 블로그 (06.03)</p>
-      <p class="strat-body">💡 소비자가 기존 라면과 자발 비교 표현을 생산하기 시작했습니다. 공식 채널에서 맛별 포지셔닝(블랙패퍼 → 매콤 떡볶이 취향, 봉골레 → 해산물 파스타 감성)을 선제 정의해 배포하면 이 흐름을 브랜드가 원하는 방향으로 가이드할 수 있습니다.</p>
-    </div>
+    <p class="insight-title"><span class="icon icon-red">↓</span>채널별 언급량 — 06.01 급등 이후 감소, 블로그에서 내돈내산 맛 비교 후기 본격화</p>
+    <p class="insight-body">6월 1일 최고점(613건) 이후 언급량은 6월 3일 36건으로 94.1% 급감했습니다. 인스타그램은 17건(47.2%)으로 최다 채널을 유지했으나 전일 대비 59.5% 감소하며 화제성이 빠르게 축소됐습니다. 블로그(8건)와 커뮤니티(7건)는 상대적으로 언급이 유지됐습니다. 화제성 버즈가 감소하는 가운데, 블로그에서 "불닭볶음면보다 덜 맵고 달달", "봉골레 마늘향·해산물 감칠맛 꽤 괜찮고" 등 실구매 체험 후기가 기간 내 처음으로 다수 등장하며 실소비 단계로 전환되는 초기 신호로 해석됩니다. 구매처 안내와 맛별 추천 콘텐츠를 활용해 잔류 관심을 구매 행동으로 연결하는 후속 마케팅이 필요합니다.</p>
   </div>
   <div class="divider-sm"></div>
 
   <!-- 시사점 2 -->
   <div class="insight-row">
-    <p class="insight-title"><span class="icon icon-blue">→</span>연관어 — 채널별 언어 분화, 블로그서 맛 비교 연관어 첫 등장</p>
-    <p class="insight-body">인스타그램은 bts(11건)·#아리(7건)·icn(3건) 등 팬덤 해시태그와 공항 연관어 중심이다. 블로그에서는 라면(4건)·매운맛(3건)·봉골레(2건)·조리방법(2건)·불닭볶음면(2건) 등 제품 맛·조리 연관어가 처음 상위에 등장했다. 특히 "불닭볶음면"이 연관어로 나타난 것은 소비자가 기존 라면과 자발 비교를 시작했음을 보여준다. 커뮤니티에서 arih 아리소(2건)가 신규 등장했으며, 원문 확인 결과 hy 대리점 주문 접수 게시물에서 비롯된 것으로 확인됐다.</p>
-    <div class="strat-wrap">
-      <p class="strat-quote">"BTS 이름을 걸고 만든 만큼 실망시키지 않는 퀄리티. 신전떡볶이 같은 후추 베이스 좋아하시는 분들이라면 무조건 추천합니다." — 네이버 블로그 (06.03)</p>
-      <p class="strat-body">💡 공식 채널에서 맛별 포지셔닝(블랙패퍼 → 매콤 떡볶이 취향, 봉골레 → 해산물 파스타 감성)을 선제 정의해 배포하면, 지금 형성 중인 소비자 비교 언어를 브랜드가 원하는 방향으로 가이드할 수 있습니다.</p>
-    </div>
+    <p class="insight-title"><span class="icon icon-blue">→</span>연관어 — 채널별 언어 분화, 블로그에서 맛 비교 연관어 첫 등장</p>
+    <p class="insight-body">채널별 소비자 언어가 뚜렷이 갈립니다. 인스타그램은 bts·#아리·icn 등 팬덤 해시태그 중심이며, 블로그에서는 라면·매운맛·봉골레·불닭볶음면 등 맛·조리 연관어가 이번 기간 처음 상위에 등장했습니다. 특히 "불닭볶음면"이 함께 언급된 것은 소비자가 자발적으로 기존 제품과 비교하기 시작했음을 보여줍니다. 커뮤니티에서는 arih 아리소(2건)가 신규 등장했으며, 원문 확인 결과 hy 대리점 주문 접수 게시물에서 비롯된 것으로 확인됐습니다. 화제성 언어에서 소비 언어로 대화의 축이 이동하고 있는 만큼, 맛별 포지셔닝(블랙패퍼 → 매콤 떡볶이 취향, 봉골레 → 해산물 파스타 감성) 콘텐츠를 선제 배포해 소비자 비교 언어를 브랜드가 원하는 방향으로 가이드할 필요가 있습니다.</p>
   </div>
   <div class="divider-sm"></div>
 
   <!-- 시사점 3 -->
   <div class="insight-row">
     <p class="insight-title"><span class="icon icon-blue">↗</span>원문 분석 — 글로벌 팬덤이 파급력 주도, 비협찬 자발이 협찬 상회</p>
-    <p class="insight-body">인스타그램 좋아요 1위(2,864건)·2위(2,816건)는 인천공항 LED 광고판 정국 사진을 공유한 비한국어 글로벌 팬덤 게시물이다. 한국어 게시물 최고 좋아요 204건과 비교하면 약 14배 격차다. 한국어 내에서는 비협찬 자발 리뷰(204건)가 협찬 게시물(65건·38건)을 상회했다. 언론사뉴스 2건 중 스포츠Q는 "hy-HYBE 합작법인 hyh 설립·아리는 에스닉이 아닌 메인스트림 직접 진입" 전략 맥락을 심층 보도했다.</p>
-    <div class="strat-wrap">
-      <p class="strat-quote">"기존 K라면이 에스닉 마켓에서 메인스트림 채널로 이동하는 흐름을 타면서 아리는 처음부터 메인스트림을 겨냥해 당당히 진입했다." — 언론사 뉴스 · 스포츠Q (06.03)</p>
-      <p class="strat-body">💡 공항 OOH 광고가 이틀 연속(06.02·06.03) 글로벌 팬덤 자발 확산의 단일 트리거로 작동했습니다. BTS 공연·팬미팅 일정과 연동한 OOH 노출 캘린더를 사전 기획하고, 비협찬 자발 후기를 공식 채널이 리그램·공유하는 방식으로 소비자 목소리를 증폭시켜야 합니다.</p>
-    </div>
+    <p class="insight-body">인스타그램 좋아요 1위(2,864건)·2위(2,816건)는 모두 인천공항 LED 광고판 정국 사진을 공유한 글로벌 팬덤 게시물이 차지했습니다. 한국어 게시물 최고 좋아요 204건과 약 14배 격차로, 공항 OOH 광고 하나가 이틀 연속(06.02·06.03) 글로벌 팬덤 자발 확산의 트리거로 작동했습니다. 한국어 내에서는 비협찬 자발 리뷰(204건)가 협찬 게시물(65건·38건)을 상회했습니다. BTS 공연·팬미팅 일정과 연동한 OOH 노출 캘린더를 사전 기획하고, 초기 구매자 자발 후기를 공식 채널이 리그램·공유하는 방식으로 소비자 목소리를 증폭시켜야 합니다.</p>
   </div>
   <div class="divider-sm"></div>
 
   <!-- 시사점 4: 부정 이슈 -->
   <div class="insight-row">
-    <p class="insight-title"><span class="icon icon-yellow">⚠</span>부정 이슈 — 커뮤니티 외관·브랜드 비판, 유통 커버리지 불균형 확인</p>
-    <p class="insight-body">커뮤니티 원문에서 "포장 맛없게 생김·서양 라면 같아서 안살듯"(외관 비판)·"방탄 등골빨아먹는 사람들"(브랜드 비판)이 확인됐다. 현재까지 맛 체험 부정 원문은 확인되지 않았다. 블로그·커뮤니티 복수 원문에서 "사는 지역 마트에서 봉지라면만 판매 중, 음료·컵라면은 없었다"는 유통 커버리지 불균형이 직접 언급됐다.</p>
-    <div class="strat-wrap">
-      <p class="strat-quote">"제가 사는 지역 마트에서는 아직 봉지라면만 판매 중이었습니다. 화면을 보니 음료와 컵라면 버전도 있는 것 같던데." — 네이버 블로그 (06.03)</p>
-      <p class="strat-body">💡 구매 의향 소비자가 제품을 찾지 못하는 상황이 반복되면 부정 언급으로 전환될 수 있습니다. 6월 4일 정식 런칭 이후 유통 커버리지 확대 속도를 모니터링하고, 채널별·지역별 구매 가능 안내 콘텐츠를 선제 배포해야 합니다.</p>
-    </div>
+    <p class="insight-title"><span class="icon icon-yellow">⚠</span>부정 이슈 — 외관·브랜드 비판과 유통 불균형 원문 확인</p>
+    <p class="insight-body">커뮤니티 원문에서 "포장 맛없게 생김·서양 라면 같아서 안살듯"(외관 비판), "방탄 등골빨아먹는 사람들"(브랜드 비판)이 확인됐습니다. 현재까지 맛 체험 부정 원문은 확인되지 않았으나, 외관·브랜드 비판은 구매 전 이탈로 이어질 수 있는 신호입니다. 블로그·커뮤니티 복수 원문에서는 "사는 지역 마트에서 봉지라면만 판매 중, 음료·컵라면은 없었다"는 유통 커버리지 불균형도 확인됐습니다. 6월 4일 정식 런칭 이후 유통 커버리지 확대 속도를 모니터링하고, 채널별·지역별 구매 가능 안내 콘텐츠를 선제 배포해야 합니다.</p>
   </div>
 </div>
 
@@ -242,7 +223,7 @@
 
   <!-- ① 채널별 비교 -->
   <div class="panel">
-    <p class="panel-title">① 채널별 주요 연관어 비교 <span style="font-size:10px;font-weight:400;color:var(--text3)"><span style="font-weight:600">채널 색상</span> = 고유 연관어 · 회색 = 공통</span></p>
+    <p class="panel-title">① 채널별 주요 연관어 비교<br><span style="font-size:10px;font-weight:400;color:var(--text3)"><span style="font-weight:600">채널 색상</span> = 고유 연관어 · 회색 = 공통</span></p>
     <table class="tbl" id="chAssocTbl">
       <thead><tr><th style="width:88px">채널</th><th>주요 연관어</th></tr></thead>
       <tbody></tbody>
@@ -251,7 +232,7 @@
 
   <!-- ② 일별 추이 -->
   <div class="panel">
-    <p class="panel-title">② 일별 연관어 순위 추이 TOP 10 <span style="font-size:10px;font-weight:400;color:var(--text3)"><span class="trend-up">녹색</span>=상승 <span class="trend-new">파란색</span>=신규</span></p>
+    <p class="panel-title">② 일별 연관어 순위 추이 TOP 5<br><span style="font-size:10px;font-weight:400;color:var(--text3)"><span class="trend-up">녹색</span> = 순위 상승 · <span class="trend-new">파란색</span> = 신규 등장</span></p>
     <div class="overflow-x">
       <table class="tbl" style="min-width:560px">
         <thead id="trendHead"></thead>
@@ -262,7 +243,7 @@
 
   <!-- ③ 합산 순위 -->
   <div class="panel">
-    <p class="panel-title">③ 7채널 합산 연관어 순위 TOP 50</p>
+    <p class="panel-title">③ 연관어 순위 TOP 50</p>
     <div class="scroll-tbl">
       <table class="tbl" id="rankTbl">
         <thead><tr><th style="width:32px">순위</th><th>연관어</th><th style="width:44px;text-align:right">빈도</th><th style="width:90px;white-space:nowrap">주도 채널</th></tr></thead>
@@ -273,11 +254,10 @@
 
   <!-- ④ 버블 -->
   <div class="panel">
-    <p class="panel-title">④ 7채널 합산 연관어 TOP 15 버블</p>
+    <p class="panel-title">④ 연관어 버블 TOP 15<br><span style="font-size:10px;font-weight:400;color:var(--text3)">버블 크기 = 합산 빈도 · 색상 = 최다 언급 채널 기준</span></p>
     <div style="position:relative;width:100%;height:240px;overflow:hidden">
       <canvas id="bubC" style="position:absolute;top:0;left:0"></canvas>
     </div>
-    <p class="note">버블 크기 = 합산 빈도 · 색상 = 최다 언급 채널 기준</p>
   </div>
 </div>
 
@@ -285,19 +265,19 @@
 <div class="sec-divider"></div>
 <div class="sec-wrap">
   <p class="sec-label">섹션 03</p>
-  <h2 class="sec-title">원문 분석 — 인스타그램 좋아요순</h2>
+  <h2 class="sec-title">원문 분석 — 인스타그램</h2>
   <div class="insight-bar">
     <strong>전체 기준 좋아요 1·2위 글로벌 팬덤(2,864건·2,816건). 한국어 최고 204건(비협찬 언박싱).</strong> 인스타그램 수치에는 글로벌 팬덤 게시물이 포함돼 있습니다.
   </div>
 
   <div class="panel">
-    <p class="panel-title">전체 기준 좋아요 TOP 5 (글로벌 포함)</p>
-    <div id="posts-all"></div>
+    <p class="panel-title">① TOP 5 (좋아요순, 한국어)</p>
+    <div id="posts-kr"></div>
   </div>
 
   <div class="panel">
-    <p class="panel-title">한국어 게시물 좋아요 TOP 5</p>
-    <div id="posts-kr"></div>
+    <p class="panel-title">② TOP 5 (좋아요순, 글로벌 포함)</p>
+    <div id="posts-all"></div>
     <p class="note" style="margin-top:10px">글로벌 게시물은 인스타그램 수치에 포함되나 국내 소비자 반응 분석은 한국어 기준을 별도 제시합니다.</p>
   </div>
 </div>
@@ -358,7 +338,7 @@ const hr=document.createElement("tr");
 hr.innerHTML=`<th style="width:30px">순위</th>${TREND.map(d=>`<th style="min-width:80px">${d.date}</th>`).join("")}`;
 tHead.appendChild(hr);
 const tTbl=document.getElementById("trendTbl");
-for(let r=0;r<10;r++){
+for(let r=0;r<5;r++){
   const tr=document.createElement("tr");
   let cells=`<td class="num bold">${r+1}위</td>`;
   TREND.forEach((day,di)=>{
@@ -435,7 +415,7 @@ function renderPosts(posts,containerId){
         <span class="post-like">좋아요 <strong>${p.like.toLocaleString()}</strong></span>
         <span class="post-date">${p.date}</span>
       </div>
-      <p class="post-body">${p.body}</p>
+      <p class="post-body" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.body}</p>
       <a class="post-link" href="${p.url}" target="_blank" rel="noopener">원문 보기 →</a>`;
     wrap.appendChild(card);
   });
