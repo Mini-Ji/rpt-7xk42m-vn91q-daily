@@ -95,6 +95,28 @@
   .trend-up{color:var(--pos);font-weight:700}
   .trend-new{color:var(--accent);font-weight:700}
 
+
+  /* ── 모바일 표 넘침 방지: 채널별 주요 연관어 비교 ── */
+  #chAssocTbl {
+    table-layout: fixed;
+    width: 100%;
+  }
+  #chAssocTbl th:first-child,
+  #chAssocTbl td:first-child {
+    width: 82px;
+  }
+  #chAssocTbl td:nth-child(2) {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  #chAssocTbl td:nth-child(2) span {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 3px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
   /* ── 원문 카드 ── */
   .post-card{border-bottom:1px solid var(--border);padding:14px 0}
   .post-card:last-child{border-bottom:none;padding-bottom:0}
@@ -221,7 +243,7 @@
   <!-- ① 채널별 비교 -->
   <div class="panel">
     <p class="panel-title">① 채널별 주요 연관어 비교<br><span style="font-size:10px;font-weight:400;color:var(--text3)"><span style="font-weight:600">채널 색상</span> = 고유 연관어 · 회색 = 공통</span></p>
-    <table class="tbl" id="chAssocTbl">
+    <table class="tbl" id="chAssocTbl" style="width:100%;table-layout:fixed">
       <thead><tr><th style="width:88px">채널</th><th>주요 연관어</th></tr></thead>
       <tbody></tbody>
     </table>
