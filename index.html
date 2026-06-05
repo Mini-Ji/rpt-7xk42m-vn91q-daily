@@ -8,7 +8,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap');
   :root {
-    --bg:#f5f5f2;--bg2:#ffffff;--bg3:#efefeb;
+    --bg:#ffffff;--bg2:#ffffff;--bg3:#ffffff;
     --border:#e0e0d8;--border2:#c8c8c0;
     --text1:#1a1a18;--text2:#3d3d38;--text3:#7a7a72;
     --ig:#e05ea0;--news:#ff9f43;--dnews:#00b8d9;
@@ -16,8 +16,8 @@
     --pos:#34c278;--neg:#e84040;--accent:#3b8de0;--warn:#ff9f43;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  html{font-size:19px}
-  body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text1);line-height:1.6;max-width:480px;margin:0 auto;padding:0}
+  html{font-size:19px;background:#ffffff}
+  body{font-family:'Noto Sans KR',sans-serif;background:#ffffff;color:var(--text1);line-height:1.6;max-width:520px;margin:0 auto;padding:0}
 
   /* ── 헤더 ── */
   .rpt-header{padding:.85rem 1rem .85rem;border-bottom:1px solid var(--border);background:var(--bg2)}
@@ -95,33 +95,6 @@
   .trend-up{color:var(--pos);font-weight:700}
   .trend-new{color:var(--accent);font-weight:700}
 
-
-  /* ── 모바일 표 넘침 방지: 채널별 주요 연관어 비교 ── */
-  #chAssocTbl {
-  table-layout: fixed;
-  width: 100%;
-}
-
-#chAssocTbl th:first-child,
-#chAssocTbl td:first-child {
-  width: 110px;
-  min-width: 110px;
-}
-
-#chAssocTbl td:nth-child(2) {
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  line-height: 1.8;
-}
-  
-  #chAssocTbl td:nth-child(2) span {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 3px;
-    word-break: break-word;
-    overflow-wrap: anywhere;
-  }
-
   /* ── 원문 카드 ── */
   .post-card{border-bottom:1px solid var(--border);padding:14px 0}
   .post-card:last-child{border-bottom:none;padding-bottom:0}
@@ -135,6 +108,96 @@
 
   /* ── 섹션 구분 ── */
   .sec-divider{height:1px;background:var(--border);margin:0}
+
+  /* ── 노션 모바일 임베드 보정: 흰 배경 + 연관어 표 겹침 방지 ── */
+  html, body {
+    background: #ffffff !important;
+  }
+
+  .sec-wrap,
+  .summary-wrap,
+  .rpt-header,
+  .panel {
+    background: #ffffff !important;
+  }
+
+  .tbl th {
+    background: #ffffff !important;
+  }
+
+  #chAssocTbl {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse;
+  }
+
+  #chAssocTbl th:first-child,
+  #chAssocTbl td:first-child {
+    width: 132px !important;
+    min-width: 132px !important;
+    max-width: 132px !important;
+    white-space: nowrap !important;
+    padding-right: 10px !important;
+    vertical-align: top !important;
+  }
+
+  #chAssocTbl th:nth-child(2),
+  #chAssocTbl td:nth-child(2) {
+    width: auto !important;
+    min-width: 0 !important;
+    padding-left: 10px !important;
+    word-break: keep-all !important;
+    overflow-wrap: anywhere !important;
+    line-height: 1.9 !important;
+    vertical-align: top !important;
+  }
+
+  #chAssocTbl td:first-child .dot {
+    margin-right: 4px !important;
+  }
+
+  #chAssocTbl td:nth-child(2) span {
+    display: inline-block !important;
+    max-width: 100% !important;
+    margin-right: 6px !important;
+    margin-bottom: 3px !important;
+    word-break: keep-all !important;
+    overflow-wrap: anywhere !important;
+    vertical-align: baseline !important;
+  }
+
+  @media (max-width: 430px) {
+    body {
+      max-width: none !important;
+      width: 100% !important;
+    }
+
+    .sec-wrap,
+    .summary-wrap,
+    .rpt-header {
+      padding-left: 14px !important;
+      padding-right: 14px !important;
+    }
+
+    .panel {
+      padding: 14px !important;
+    }
+
+    #chAssocTbl th:first-child,
+    #chAssocTbl td:first-child {
+      width: 124px !important;
+      min-width: 124px !important;
+      max-width: 124px !important;
+      font-size: 14px !important;
+    }
+
+    #chAssocTbl th:nth-child(2),
+    #chAssocTbl td:nth-child(2) {
+      font-size: 14px !important;
+      padding-left: 8px !important;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -249,7 +312,7 @@
   <div class="panel">
     <p class="panel-title">① 채널별 주요 연관어 비교<br><span style="font-size:10px;font-weight:400;color:var(--text3)"><span style="font-weight:600">채널 색상</span> = 고유 연관어 · 회색 = 공통</span></p>
     <table class="tbl" id="chAssocTbl" style="width:100%;table-layout:fixed">
-      <thead><tr><th style="width:88px">채널</th><th>주요 연관어</th></tr></thead>
+      <thead><tr><th style="width:132px">채널</th><th>주요 연관어</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
