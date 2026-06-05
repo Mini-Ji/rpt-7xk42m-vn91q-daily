@@ -98,17 +98,22 @@
 
   /* ── 모바일 표 넘침 방지: 채널별 주요 연관어 비교 ── */
   #chAssocTbl {
-    table-layout: fixed;
-    width: 100%;
-  }
-  #chAssocTbl th:first-child,
-  #chAssocTbl td:first-child {
-    width: 82px;
-  }
-  #chAssocTbl td:nth-child(2) {
-    word-break: break-word;
-    overflow-wrap: anywhere;
-  }
+  table-layout: fixed;
+  width: 100%;
+}
+
+#chAssocTbl th:first-child,
+#chAssocTbl td:first-child {
+  width: 110px;
+  min-width: 110px;
+}
+
+#chAssocTbl td:nth-child(2) {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+  
   #chAssocTbl td:nth-child(2) span {
     display: inline-block;
     max-width: 100%;
