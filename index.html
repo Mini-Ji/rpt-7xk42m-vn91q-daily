@@ -3,319 +3,570 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>ARIH 소셜 현황 : 6월 1주</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<title>ARIH 주간 현황 보고서 · 2026-06-01~07</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap');
-  :root{--bg:#ffffff;--bg2:#ffffff;--bg3:#ffffff;--border:#e0e0d8;--border2:#c8c8c0;--text1:#1a1a18;--text2:#3d3d38;--text3:#7a7a72;--ig:#e05ea0;--news:#ff9f43;--dnews:#00b8d9;--blog:#34c278;--comm:#6c63ff;--nnews:#3b8de0;--yt:#e84040;--ncafe:#00b894;--dcafe:#a29bfe;--tis:#fd79a8;--pos:#34c278;--neg:#e84040;--accent:#3b8de0;--warn:#ff9f43;}
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  html{font-size:16px;background:#ffffff}
-  body{font-family:'Noto Sans KR',sans-serif;background:#ffffff;color:var(--text1);line-height:1.6;max-width:520px;margin:0 auto;padding:0}
-  .rpt-header{padding:.15rem 1rem .12rem;background:#ffffff}
-  .rpt-date{font-size:20px;font-weight:700;color:var(--text1);margin-bottom:6px;letter-spacing:-.02em}
-  .rpt-criteria{margin-top:.4rem;margin-bottom:.4rem}
-  .rpt-criteria-item{font-size:11px;color:var(--text3);line-height:1.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .rpt-divider{height:1px;background:var(--border);margin-top:.4rem}
-  .issue-wrap{padding:1.25rem 1rem 1rem}
-  .issue-box{background:#fff8f0;border:1px solid #f0e0d0;border-radius:12px;padding:1.1rem}
-  .issue-title{font-size:14px;font-weight:700;color:var(--text1);margin-bottom:.85rem}
-  .issue-para{font-size:13px;color:var(--text2);line-height:1.85;margin-bottom:.9rem}
-  .issue-para:last-child{margin-bottom:0}
-  .sec-wrap{padding:1.25rem 1rem}
-  .sec-title-row{display:flex;align-items:center;gap:8px;margin-bottom:.5rem}
-  .sec-checkbox{width:15px;height:15px;border-radius:3px;background:var(--pos);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .sec-title{font-size:14px;font-weight:700;color:var(--text1)}
-  .sec-bar{height:1px;background:var(--border);margin-bottom:1rem}
-  .sec-desc{font-size:13px;color:var(--text1);line-height:1.9;margin-bottom:1rem}
-  .panel{background:#ffffff;border:1px solid var(--border);border-radius:12px;padding:1rem;width:100%}
-  .panel+.panel{margin-top:.75rem}
-  .panel-title{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:.02em;margin-bottom:10px;text-transform:uppercase}
-  .note{font-size:11px;color:var(--text3);margin-top:8px;line-height:1.5}
-  .overflow-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .scroll-tbl{max-height:300px;overflow-y:auto}
-  .scroll-tbl thead th{position:sticky;top:0;z-index:1}
-  .ch-legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:8px}
-  .leg-item{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text2)}
-  .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}
-  .total-note{display:none}
-  .tbl{width:100%;border-collapse:collapse;font-size:12px}
-  .tbl th{color:var(--text1);font-weight:600;padding:6px 8px;border-bottom:1.5px solid var(--border);text-align:left;white-space:nowrap;background:#f0f0ed;font-size:12px}
-  .tbl td{padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle;line-height:1.6}
-  .tbl td.bold{color:var(--text1);font-weight:700}
-  .tbl td.num{text-align:right;font-family:'DM Mono',monospace;white-space:nowrap}
-  .tbl td.nowrap{white-space:nowrap}
-  .tbl tr:last-child td{border-bottom:none}
-  .tbl tfoot td{background:#f0f0ed;font-weight:700;color:var(--text1)}
-  .chtbl{font-size:10px !important}
-  .chtbl th,.chtbl td{padding:4px 3px !important;text-align:center !important}
-  .chtbl th:first-child,.chtbl td:first-child{text-align:left !important;padding-left:5px !important}
-  .chtbl td.num{font-family:inherit !important}
-  .chip{font-size:11px;padding:2px 8px;border-radius:20px;white-space:nowrap;display:inline-block;font-weight:500}
-  .chip-ad{background:#fde8e8;color:#c0392b}
-  .chip-org{background:#e3f4ec;color:#1a7a45}
-  .chip-global{background:#f0f0ec;color:#5a5a54}
-  .chip-ref{background:#e8f0fe;color:#3b8de0}
-  .trend-up{color:var(--pos);font-weight:700}
-  .trend-new{color:var(--accent);font-weight:700}
-  .post-card{border-bottom:1px solid var(--border);padding:14px 0}
-  .post-card:last-child{border-bottom:none;padding-bottom:0}
-  .post-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:7px}
-  .post-account{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--text1)}
-  .post-like{font-size:12px;color:var(--text2)}
-  .post-like strong{color:var(--text1)}
-  .post-date{font-size:11px;color:var(--text3);width:100%;margin-top:1px}
-  .post-body{font-size:13px;color:var(--text1);line-height:1.75;margin-bottom:8px;word-break:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .post-link{font-size:12px;color:var(--accent);text-decoration:none;display:block;text-align:right;padding-top:4px}
-  html,body,.sec-wrap,.issue-wrap,.rpt-header,.panel{background:#ffffff !important}
-  .issue-box{background:#fff8f0 !important}
-  .tbl th{background:#f0f0ed !important;font-weight:600 !important}
-  .tbl tfoot td{background:#f0f0ed !important;font-weight:700 !important;color:var(--text1) !important}
-  #chAssocTbl{width:100% !important;table-layout:fixed !important;border-collapse:collapse}
-  #chAssocTbl th:first-child,#chAssocTbl td:first-child{width:120px !important;min-width:120px !important;max-width:120px !important;white-space:nowrap !important;padding-right:8px !important;vertical-align:top !important}
-  #chAssocTbl th:nth-child(2),#chAssocTbl td:nth-child(2){width:auto !important;padding-left:8px !important;word-break:keep-all !important;overflow-wrap:anywhere !important;line-height:1.9 !important;vertical-align:top !important}
-  #chAssocTbl td:nth-child(2) span{display:inline-block !important;max-width:100% !important;margin-right:6px !important;margin-bottom:3px !important;word-break:keep-all !important}
-  @media(max-width:430px){body{max-width:none !important;width:100% !important}.sec-wrap,.issue-wrap,.rpt-header{padding-left:14px !important;padding-right:14px !important}.panel{padding:14px !important}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p:#4A67FF;
+  --pd:#EEF1FF;
+  --pm:#c5cefd;
+  --bg:#F7F8FC;
+  --sf:#FFFFFF;
+  --tx:#222222;
+  --sub:#555555;
+  --mt:#999999;
+  --bd:#E4E7F0;
+  --up:#1D9F6E;
+  --dn:#D94040;
+  --r:10px;
+  --r2:6px;
+  --f:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif
+}
+body{font-family:var(--f);background:var(--bg);color:var(--tx);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all}
+.w{max-width:640px;margin:0 auto;padding-bottom:48px}
+
+/* header */
+.hdr{background:var(--p);padding:28px 20px 22px;margin-bottom:20px}
+.hdr .eye{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:6px}
+.hdr h1{font-size:19px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:12px}
+.hdr .meta{display:flex;flex-wrap:wrap;gap:6px 14px}
+.hdr .meta span{font-size:12px;color:rgba(255,255,255,.75)}
+
+/* section label */
+.sl{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);padding:0 16px;margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+.sl::after{content:'';flex:1;height:1px;background:var(--bd)}
+
+/* summary card */
+.sc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px 18px;margin:0 16px 10px}
+.sc .lbl{display:flex;align-items:center;gap:7px;margin-bottom:9px}
+.sc .num{width:20px;height:20px;border-radius:50%;background:var(--p);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sc .ttl{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--p)}
+.sc p{font-size:13.5px;line-height:1.75;color:var(--tx)}
+
+/* chart block */
+.cb{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px 16px 12px;margin:0 16px 10px}
+.cb .ct{font-size:11.5px;font-weight:700;color:var(--sub);margin-bottom:12px}
+
+/* table */
+.tb{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);margin:0 16px 10px;overflow:hidden}
+.ts{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tb table{width:100%;min-width:460px;border-collapse:collapse;font-size:12px}
+.tb th{background:var(--bg);padding:9px 10px;text-align:right;font-size:10.5px;font-weight:700;color:var(--mt);letter-spacing:.03em;border-bottom:1px solid var(--bd);white-space:nowrap}
+.tb th:first-child{text-align:left}
+.tb td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--bd);white-space:nowrap;color:var(--tx)}
+.tb td:first-child{text-align:left;font-weight:600}
+.tb tr:last-child td{border-bottom:none}
+.rsum td{background:var(--pd);font-weight:700;border-top:2px solid var(--pm);color:var(--p)}
+.rcmp td{background:#f0f2ff;font-weight:700;border-bottom:none;color:#3a52cc}
+.up{color:var(--up);font-weight:700}
+.dn{color:var(--dn);font-weight:700}
+.neu{color:var(--mt)}
+
+/* keyword timeline */
+.kwt{margin:0 16px 10px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.kwt .kw-note-hdr{font-size:10.5px;color:var(--mt);padding:12px 16px 4px}
+.kwrow{display:flex;gap:10px;align-items:flex-start;padding:10px 16px;border-bottom:1px solid var(--bd)}
+.kwrow:last-child{border-bottom:none}
+.kwdate{font-size:12px;font-weight:800;color:var(--p);min-width:38px;padding-top:3px;flex-shrink:0}
+.kwtags{display:flex;flex-wrap:wrap;gap:5px;flex:1}
+.kt{border-radius:var(--r2);padding:3px 9px;font-size:12px;font-weight:400}
+.kt.hot{background:var(--pd);border:1px solid var(--pm);color:var(--p);font-weight:700}
+.kt.neu{background:var(--bg);border:1px solid var(--bd);color:var(--sub)}
+.kw-ev{font-size:10px;color:var(--mt);align-self:center;flex-shrink:0;background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:2px 6px}
+
+/* pill legend */
+.pills{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px;margin-bottom:10px}
+.pill{display:flex;align-items:center;gap:5px;background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--sub)}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* post / news */
+.pc,.nc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px 16px;margin:0 16px 10px}
+.pm,.nm{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
+.badge{font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;background:var(--pd);color:var(--p);border-radius:4px;padding:2px 7px;flex-shrink:0}
+.pdate,.ndate{font-size:11px;color:var(--mt);flex-shrink:0}
+.ptxt,.nsumm{font-size:12.5px;line-height:1.68;color:var(--tx);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pstats{display:flex;gap:14px;margin-top:9px}
+.pstat{font-size:11px;color:var(--mt)}
+.pstat strong{color:var(--sub);font-weight:700}
+.plink,.nlink{display:inline-block;margin-top:8px;font-size:11px;color:var(--p);text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.ntitle{font-size:13px;font-weight:700;line-height:1.45;margin-bottom:7px}
+.nfooter{display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:wrap}
+.nsrc{font-size:11px;color:var(--mt);background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:2px 6px}
+
+/* footer */
+.ftr{padding:24px 16px 0;border-top:1px solid var(--bd);text-align:center;font-size:11px;color:var(--mt);line-height:1.9}
+.sub-note{font-size:10.5px;color:var(--mt);padding:2px 16px 10px}
+
+@media(max-width:430px){
+  .hdr h1{font-size:17px}
+  .sc p{font-size:13px}
+}
 </style>
 </head>
 <body>
+<div class="w">
 
-<!-- 헤더 -->
-<div class="rpt-header">
-  <p class="rpt-date">ARIH 소셜 현황: 6월 1주</p>
-  <div class="rpt-criteria">
-    <p class="rpt-criteria-item">* 출처 : Sometrend</p>
-    <p class="rpt-criteria-item">* 기간 : 2026.06.01 – 06.07</p>
-    <p class="rpt-criteria-item">* 채널 : 인스타그램, 네이버블로그, 티스토리, 네이버카페, 다음카페, 커뮤니티, 언론사·다음·네이버 뉴스, 유튜브</p>
-    <p class="rpt-criteria-item">* 산출 시점에 따라 약간의 수치 차이가 발생할 수 있습니다.</p>
-  </div>
-  <div class="rpt-divider"></div>
-</div>
-
-<!-- 이슈사항 정리 -->
-<div class="issue-wrap">
-  <div class="issue-box">
-    <p class="issue-title">📌 이슈사항 정리</p>
-    <p class="issue-para">6월 1주 총 언급량은 1,602건으로, 06.01(736건) 런칭 당일 최고점을 기록한 뒤 빠르게 감소했습니다. 인스타그램이 698건(43.6%)으로 압도적 최다였으며, 다음뉴스(205건)·네이버뉴스(188건)·언론사뉴스(151건)가 뒤를 이었습니다. 06.05 언론사뉴스가 66건으로 반등한 것은 메가MGC커피 전국 4,300개 매장 입점 보도 때문이며, 온라인 기획세트(4,000세트) 3일 완판과 일본·멕시코·캐나다 글로벌 확장 계획도 언론을 통해 공식화됐습니다. 유통 확장·완판 등 긍정적 성과가 소셜 채널보다 언론을 통해 먼저 확산되는 구조인 만큼, 공식 소셜 채널에서 브랜드 서사를 주도적으로 전달하는 방향을 검토할 필요가 있습니다.</p>
-    <p class="issue-para">채널별 연관어에서는 소비자 관심사의 변화가 확인됩니다. 인스타그램은 #아리, #arih, #arihiscominghome 등 팬덤 해시태그와 광고, 런칭, 팔로워 중심의 화제성 대화가 주를 이룬 반면, 블로그에서는 봉골레, 파스타, 라볶이, 고추장버터, 트러플불고기, 간장버터 등 제품 맛과 조리 경험 관련 키워드가 새롭게 다수 등장했습니다. 커뮤니티에서는 편의점, 마트, 온라인 등 구매처 정보와 캐나다, 멕시코 등 글로벌 유통 관련 언급이 확인됐습니다. 이는 런칭 초기 브랜드 인지도와 화제성 중심의 버즈가 실제 제품 경험과 구매 탐색 단계로 이동하고 있음을 보여주는 신호로, 향후에는 맛 차별점, 구매 가능 채널, 해외 판매 정보 등 실구매에 필요한 정보를 보다 체계적으로 제공할 필요가 있습니다.</p>
-    <p class="issue-para">7일 누적 좋아요 1위(18,588건)는 스포츠 선수에게 ARIH 라면과 건강소다를 제공하며 운동 루틴과 연결한 콘텐츠였으며, 2위(10,930건)는 듀얼 바이오틱 소다와 모던누들을 조합해 저당·저열량 가치를 강조한 게시물이었습니다. 또한 3위(8,206건)는 대만 미디어 계정이 한국 이마트에서 ARIH 라면 7종을 직접 소개하며 여행객 구매를 추천한 중국어 콘텐츠로, 해외 소비자의 실질적인 구매 관심을 보여주었습니다. 이외에도 BTS 아리랑 월드투어 콘서트 현장 ARIH 부스 방문 후기 등 글로벌 팬덤 기반 자발 콘텐츠가 다수 확인되며 오프라인 체험이 온라인 확산으로 이어지는 선순환 구조가 형성되고 있습니다. 다만 현재 인스타그램 버즈는 광고 집행과 팬덤 중심 확산 비중이 높은 만큼, 향후 블로그·커뮤니티를 통해 실제 구매 후기와 제품 경험 기반의 자생적 확산 여부를 지속적으로 모니터링할 필요가 있습니다.</p>
+<!-- 1. HEADER -->
+<div class="hdr">
+  <div class="eye">hy 데이터팀</div>
+  <h1>ARIH 국내 소셜 미디어<br>주간 현황 보고서</h1>
+  <div class="meta">
+    <span>2026년 6월 1주차</span>
+    <span>분석 기간: 2026-06-01 ~ 2026-06-07</span>
+    <span>생성일: 2026-06-11</span>
   </div>
 </div>
 
-<!-- 채널별 언급량 -->
-<div class="sec-wrap">
-  <div class="sec-title-row">
-    <div class="sec-checkbox"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <span class="sec-title">채널별 언급량</span>
-  </div>
-  <div class="sec-bar"></div>
-  <p class="sec-desc">- 6월 1주 총 언급량은 1,602건이며, 06.01(736건) 런칭 당일 최고점을 기록했습니다.<br>- 인스타그램(698건·43.6%)이 최다이며, 다음뉴스(205건)·네이버뉴스(188건) 순입니다.<br>- 06.05 언론사뉴스가 66건으로 반등하며 메가커피 입점·완판 보도가 집중됐습니다.</p>
+<!-- 2. EXECUTIVE SUMMARY -->
+<div class="sl">Executive Summary</div>
 
-  <div class="panel">
-    <p class="panel-title">채널별 일별 언급량 추이</p>
-    <div style="position:relative;width:100%;height:200px"><canvas id="lineC"></canvas></div>
-    <div class="ch-legend" id="lineLeg"></div>
-  </div>
-
-  <div class="panel">
-    <p class="panel-title">채널 × 날짜 요약</p>
-    <div style="overflow-x:hidden">
-      <table class="tbl chtbl" style="width:100%;table-layout:fixed">
-        <thead><tr><th style="width:22%">채널</th><th>06.01</th><th>06.02</th><th>06.03</th><th>06.04</th><th>06.05</th><th>06.06</th><th>06.07</th><th>합계</th></tr></thead>
-        <tbody id="chTbl"></tbody>
-        <tfoot><tr><td class="bold">전체</td><td class="num bold">736</td><td class="num bold">248</td><td class="num bold">136</td><td class="num bold">130</td><td class="num bold">214</td><td class="num bold">64</td><td class="num bold">74</td><td class="num bold">1602</td></tr></tfoot>
-      </table>
-    </div>
-  </div>
-    <div id="donutLeg" class="ch-legend" style="margin-top:8px"></div>
-    <p class="total-note" id="totalNote"></p>
-  </div>
+<div class="sc">
+  <div class="lbl"><span class="num">1</span><span class="ttl">이번 주 브랜드 반응 요약 및 시사점</span></div>
+  <p>국내 공식 런칭 첫 주, ARIH는 소셜·뉴스 합산 931건의 언급량을 기록하며 신규 브랜드로는 이례적인 초기 인지도 형성에 성공했습니다. 인스타그램이 전체 소셜 버즈의 약 70%를 차지했고, 런칭 당일인 6월 1일 단일일 최고점 이후 6월 5일 메가MGC커피 전국 입점 이슈로 2차 버즈가 재점화되며 BTS 참여 스토리·Walmart 완판·한정 패키지 완판이라는 세 가지 자극이 맞물린 한 주였습니다. 그러나 인스타그램 언급량이 런칭 당일 502건에서 주 후반 20건대로 급감한 만큼, 다음 주부터는 자극 없는 환경에서의 자연 언급량이 브랜드 정착의 실질 지표가 됩니다. 블로그·커뮤니티에서 성분·건강 기능 탐색이 늘고 있는 흐름은 'BTS 협업 브랜드'에서 '일상 건강식품'으로의 포지셔닝 전환 시점이 가까워졌음을 시사하며, 메가MGC커피 입점을 계기로 오프라인 체험 기반 콘텐츠 확보를 선제적으로 준비하는 것이 다음 단계의 핵심 과제입니다.</p>
 </div>
 
-<!-- 연관어 분석 -->
-<div class="sec-wrap">
-  <div class="sec-title-row">
-    <div class="sec-checkbox"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <span class="sec-title">연관어 분석</span>
-  </div>
-  <div class="sec-bar"></div>
-  <p class="sec-desc">- 인스타그램은 팬덤 해시태그(#아리·#arih)와 광고·런칭 중심 연관어가 상위권을 점유했습니다.<br>- 블로그에서는 봉골레·파스타·고추장버터·트러플불고기 등 맛 이름 연관어가 주차 내 처음 다수 등장했습니다.<br>- 커뮤니티에서는 편의점·마트·캐나다·멕시코 등 구매처·글로벌 확장 연관어가 신규 확인됐습니다.</p>
+<div class="sc">
+  <div class="lbl"><span class="num">2</span><span class="ttl">버즈 형성 요인</span></div>
+  <p>이번 주 버즈의 핵심 트리거는 'BTS 기획 참여'와 'Walmart 완판 이력'이라는 두 가지 검증 서사였습니다. 해외 선론칭에서 축적된 흥행 근거가 국내 소비자에게 이미 증명된 브랜드라는 신뢰를 제공했고, 인스타그램에서 브랜드명·국가·글로벌 플랫폼 관련 연관어가 상위를 차지한 것이 이를 뒷받침합니다. 블로그는 주 후반으로 갈수록 맛·성분·패키지 탐색 비중이 높아지며 감성적 관심이 합리적 구매 검토 단계로 이동하는 흐름이 관찰됩니다. 6월 5일 메가MGC커피 4,300여 개 매장 동시 입점은 언론 66건을 집중시키며 접근성 확대라는 새로운 서사를 추가했고, 이것이 주 후반 버즈를 재가동한 직접적 요인이었습니다.</p>
+</div>
 
-  <div class="panel">
-    <p class="panel-title">① 채널별 주요 연관어 비교<br><span style="font-size:10px;font-weight:400;color:var(--text3)"><span style="font-weight:600">채널 색상</span> = 고유 연관어 · 회색 = 공통</span></p>
-    <table class="tbl" id="chAssocTbl" style="width:100%;table-layout:fixed">
-      <thead><tr><th>채널</th><th>주요 연관어</th></tr></thead>
-      <tbody></tbody>
+<div class="sc">
+  <div class="lbl"><span class="num">3</span><span class="ttl">소비자 반응 포인트</span></div>
+  <p>참여도 상위 게시물은 공식 계정이 아닌 개인 체험 후기였으며, 상위 콘텐츠는 좋아요 1만 건을 상회했습니다. 해외 팬 계정의 자발적 공유가 다수 확인되어, 글로벌 팬덤이 국내 콘텐츠 확산을 견인한 주요 집단으로 보입니다. 한정 패키지 4,000세트 완판 이후 커뮤니티에서 재입고·구매처 탐색 언급이 증가했는데, 희소성 경험이 미구매자의 관심을 자극하는 방향으로 작용한 결과로 해석됩니다. 주 후반에는 성분·건강 기능 관련 언급이 늘어나며 BTS 협업 스토리 중심의 초기 반응에서 제품력 탐색 단계로 이동하는 흐름이 관찰됩니다.</p>
+</div>
+
+<div class="sc">
+  <div class="lbl"><span class="num">4</span><span class="ttl">이벤트 페이지 반응 (GA4)</span></div>
+  <p>이벤트 페이지 세션은 전주 대비 약 700% 증가해 6.3만 건에 달했고, 5.1만 명의 활성 사용자가 실제 방문으로 연결되며 소셜 버즈가 행동 전환으로 이어졌습니다. 총 조회수 약 9만 건이 세션 수를 크게 웃돌아 방문자 상당수가 콘텐츠를 반복 탐색했음을 보여줍니다. 다만 세션당 조회수가 주 초반 약 2.0에서 주 후반 1.1 수준으로 낮아진 점은 초기 깊은 탐색자 이후 단발성 확인 방문의 비중이 높아진 것으로 해석되며, 체류를 유인할 콘텐츠 보강이 필요한 시점입니다.</p>
+</div>
+
+<!-- 3. GA4 -->
+<div class="sl">이벤트 페이지 반응 (GA4)</div>
+
+<div class="cb">
+  <div class="ct">일별 Sessions · Active Users · Views</div>
+  <canvas id="ga4C" height="190"></canvas>
+</div>
+
+<div class="tb">
+  <div class="ts">
+    <table>
+      <thead>
+        <tr>
+          <th>날짜</th><th>Sessions</th><th>Active Users</th>
+          <th>Views</th><th>V/S</th><th>Sessions 전일비</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>06/07</td><td>4,914</td><td>4,225</td><td>5,599</td><td>1.14</td><td class="dn">▼ −9.7%</td></tr>
+        <tr><td>06/06</td><td>5,441</td><td>4,663</td><td>6,418</td><td>1.18</td><td class="dn">▼ −34.5%</td></tr>
+        <tr><td>06/05</td><td>8,305</td><td>7,020</td><td>9,820</td><td>1.18</td><td class="dn">▼ −5.9%</td></tr>
+        <tr><td>06/04</td><td>8,825</td><td>7,316</td><td>10,666</td><td>1.21</td><td class="up">▲ +14.3%</td></tr>
+        <tr><td>06/03</td><td>7,721</td><td>6,471</td><td>9,271</td><td>1.20</td><td class="dn">▼ −30.0%</td></tr>
+        <tr><td>06/02</td><td>11,026</td><td>9,098</td><td>14,700</td><td>1.33</td><td class="dn">▼ −33.7%</td></tr>
+        <tr><td>06/01</td><td>16,641</td><td>12,664</td><td>33,126</td><td>1.99</td><td class="neu">—</td></tr>
+        <tr class="rsum">
+          <td>최근 7일 합계</td><td>62,873</td><td>51,457</td><td>89,600</td>
+          <td>1.43<span style="font-weight:400;font-size:10px"> 평균</span></td><td>—</td>
+        </tr>
+        <tr class="rcmp">
+          <td>직전 7일 대비</td>
+          <td class="up">▲ +697%</td><td class="up">▲ +692%</td>
+          <td class="up">▲ +561%</td><td class="dn">▼ −17%</td><td>—</td>
+        </tr>
+      </tbody>
     </table>
   </div>
+</div>
+<p class="sub-note">* 직전 7일(5/25~5/31) — Sessions 7,892 / Active Users 6,497 / Views 13,559 / V/S 1.72 (5/28 첫 유입)</p>
 
-  <div class="panel">
-    <p class="panel-title">② 일별 언급량 추이 TOP 5<br><span style="font-size:10px;font-weight:400;color:var(--text3)"><span class="trend-up">녹색</span> = 순위 상승 · <span class="trend-new">파란색</span> = 신규 등장</span></p>
-    <div class="overflow-x">
-      <table class="tbl" style="min-width:520px">
-        <thead id="trendHead"></thead>
-        <tbody id="trendTbl"></tbody>
-      </table>
+<!-- 4. CHANNEL LINE CHART -->
+<div class="sl">채널별 언급량 추이</div>
+
+<div class="pills">
+  <div class="pill"><span class="dot" style="background:#4A67FF"></span>인스타그램</div>
+  <div class="pill"><span class="dot" style="background:#2CB67D"></span>언론사뉴스</div>
+  <div class="pill"><span class="dot" style="background:#F7A600"></span>네이버블로그</div>
+  <div class="pill"><span class="dot" style="background:#E05A5A"></span>커뮤니티</div>
+  <div class="pill"><span class="dot" style="background:#9B6DFF"></span>유튜브</div>
+  <div class="pill"><span class="dot" style="background:#00B4D8"></span>네이버카페</div>
+  <div class="pill"><span class="dot" style="background:#BBBBBB"></span>티스토리</div>
+</div>
+
+<div class="cb">
+  <div class="ct">일별 채널별 언급량 추이 (범례 클릭으로 채널 ON/OFF)</div>
+  <canvas id="chC" height="220"></canvas>
+</div>
+
+<div class="tb">
+  <div class="ts">
+    <table>
+      <thead>
+        <tr><th>채널</th><th>6/1</th><th>6/2</th><th>6/3</th><th>6/4</th><th>6/5</th><th>6/6</th><th>6/7</th><th>합계</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>인스타그램</td><td>502</td><td>59</td><td>45</td><td>44</td><td>29</td><td>24</td><td>28</td><td><strong>731</strong></td></tr>
+        <tr><td>네이버블로그</td><td>46</td><td>13</td><td>11</td><td>17</td><td>28</td><td>16</td><td>19</td><td><strong>150</strong></td></tr>
+        <tr><td>커뮤니티</td><td>23</td><td>7</td><td>9</td><td>6</td><td>49</td><td>9</td><td>10</td><td><strong>113</strong></td></tr>
+        <tr><td>유튜브</td><td>22</td><td>9</td><td>3</td><td>4</td><td>2</td><td>1</td><td>3</td><td><strong>44</strong></td></tr>
+        <tr><td>네이버카페</td><td>14</td><td>4</td><td>4</td><td>4</td><td>8</td><td>4</td><td>5</td><td><strong>43</strong></td></tr>
+        <tr><td>티스토리</td><td>2</td><td>0</td><td>4</td><td>3</td><td>1</td><td>0</td><td>1</td><td><strong>11</strong></td></tr>
+        <tr><td>다음카페</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong></td></tr>
+        <tr><td>언론사뉴스</td><td>64</td><td>8</td><td>1</td><td>7</td><td>66</td><td>2</td><td>3</td><td><strong>151</strong></td></tr>
+        <tr><td style="color:var(--mt)">네이버뉴스 *</td><td>33</td><td>72</td><td>32</td><td>22</td><td>14</td><td>7</td><td>8</td><td><strong>188</strong></td></tr>
+        <tr><td style="color:var(--mt)">다음뉴스 *</td><td>42</td><td>76</td><td>30</td><td>25</td><td>18</td><td>8</td><td>6</td><td><strong>205</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<p class="sub-note">* 네이버·다음 뉴스는 keyword + exclude 적용 (include 미적용) · 차트 제외, 참고 제공</p>
+
+<!-- 5. KEYWORD TIMELINE -->
+<div class="sl">주요 키워드 변화</div>
+
+<div class="kwt">
+  <div class="kw-note-hdr">
+    <span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#EEF1FF;border:1px solid #c5cefd;margin-right:4px;vertical-align:middle"></span>파란색: 신규 등장 또는 상승 키워드 &nbsp;
+    <span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#F7F8FC;border:1px solid #E4E7F0;margin-right:4px;vertical-align:middle"></span>회색: 당일 주요 연관 키워드
+  </div>
+
+  <div class="kwrow">
+    <span class="kwdate">06/01</span>
+    <div class="kwtags">
+      <span class="kt hot">BTS</span>
+      <span class="kt hot">ARIH</span>
+      <span class="kt hot">한국</span>
+      <span class="kt neu">출시</span>
+      <span class="kt neu">월마트</span>
+      <span class="kt neu">hy</span>
+      <span class="kt neu">팔도</span>
+    </div>
+    <span class="kw-ev">런칭일</span>
+  </div>
+
+  <div class="kwrow">
+    <span class="kwdate">06/02</span>
+    <div class="kwtags">
+      <span class="kt hot">모던누들</span>
+      <span class="kt hot">방탄소년단</span>
+      <span class="kt neu">팔도</span>
+      <span class="kt neu">봉골레</span>
+      <span class="kt neu">에너지음료</span>
     </div>
   </div>
 
-  <div class="panel">
-    <p class="panel-title">③ 연관어 순위 TOP 50 (7일 합산)</p>
-    <div class="scroll-tbl">
-      <table class="tbl" id="rankTbl">
-        <thead><tr><th style="width:32px">순위</th><th>연관어</th><th style="width:48px;text-align:right">빈도</th><th style="width:88px">주도 채널</th></tr></thead>
-        <tbody></tbody>
-      </table>
+  <div class="kwrow">
+    <span class="kwdate">06/03</span>
+    <div class="kwtags">
+      <span class="kt hot">봉골레</span>
+      <span class="kt hot">라면</span>
+      <span class="kt neu">소다</span>
+      <span class="kt neu">드링크</span>
+      <span class="kt neu">한국</span>
     </div>
   </div>
+
+  <div class="kwrow">
+    <span class="kwdate">06/04</span>
+    <div class="kwtags">
+      <span class="kt hot">맛</span>
+      <span class="kt neu">라면</span>
+      <span class="kt neu">미국</span>
+      <span class="kt neu">에너지음료</span>
+      <span class="kt neu">해외</span>
+    </div>
+  </div>
+
+  <div class="kwrow">
+    <span class="kwdate">06/05</span>
+    <div class="kwtags">
+      <span class="kt hot">메가MGC커피</span>
+      <span class="kt hot">커피</span>
+      <span class="kt hot">제품</span>
+      <span class="kt neu">아리음료</span>
+      <span class="kt neu">패키지</span>
+      <span class="kt neu">브랜드</span>
+    </div>
+    <span class="kw-ev">메가커피 입점</span>
+  </div>
+
+  <div class="kwrow">
+    <span class="kwdate">06/06</span>
+    <div class="kwtags">
+      <span class="kt hot">포스트바이오틱</span>
+      <span class="kt hot">국내출시</span>
+      <span class="kt neu">모던</span>
+      <span class="kt neu">방탄소년단기획</span>
+    </div>
+  </div>
+
+  <div class="kwrow">
+    <span class="kwdate">06/07</span>
+    <div class="kwtags">
+      <span class="kt hot">저당</span>
+      <span class="kt hot">제로칼로리</span>
+      <span class="kt hot">듀얼바이오틱</span>
+      <span class="kt neu">포스트바이오틱스</span>
+      <span class="kt neu">봉골레</span>
+    </div>
+  </div>
+
 </div>
 
-<!-- 원문 분석 -->
-<div class="sec-wrap">
-  <div class="sec-title-row">
-    <div class="sec-checkbox"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <span class="sec-title">원문 분석 — 인스타그램</span>
-  </div>
-  <div class="sec-bar"></div>
-  <p class="sec-desc">- 7일 합산 좋아요 1위(18,588건)는 스포츠 선수 시딩(제품 제공) 게시물로, 아미 외 스포츠·건강 관심층으로 콘텐츠가 노출된 사례입니다.<br>- 2위(10,930건)는 런칭 광고, 3위(8,206건)는 BTS 관련 글로벌 중국어 팬덤 원문입니다.<br>- 인스타그램 수치에는 글로벌 팬덤 게시물이 포함돼 있습니다.</p>
+<!-- 6. 원문 분석 -->
+<div class="sl">원문 분석</div>
 
-  <div class="panel">
-    <p class="panel-title">① TOP 10 (좋아요순, 한국어)</p>
-    <div id="posts-kr"></div>
-  </div>
+<p style="font-size:11.5px;font-weight:700;color:var(--sub);padding:0 16px;margin-bottom:8px">인스타그램 한국어 TOP10 (좋아요 순)</p>
 
-  <div class="panel">
-    <p class="panel-title">② TOP 5 (좋아요순, 글로벌 포함)</p>
-    <div id="posts-all"></div>
-    <p class="note">글로벌 게시물은 인스타그램 수치에 포함되나 국내 소비자 반응 분석은 한국어 기준을 별도 제시합니다.</p>
-    <p class="note" style="margin-top:6px;color:var(--text3)">⚠ 부정 이슈 모니터링: 커뮤니티 원문에서 외관 비판("포장 맛없게 생김·서양 라면 같아서 안살듯"), 브랜드 비판("방탄 등골빨아먹는 사람들") 원문이 확인됐습니다. 맛 체험 부정 원문은 아직 없으나 반복 여부를 모니터링해야 합니다.</p>
-  </div>
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram</span><span class="pdate">2026-06-07</span></div>
+  <div class="ptxt">BTS의 아리 제품입니다 챙겨주셔서 감사합니다 제 소울푸드 라면인데 어떻게아시고… 운동할때 건강소다 잘 챙겨먹고 좋은성적으로 보답할게요 아리 흥해라아아 ↕ P.S 라면치고 너무 고퀄리티임 #ARIH #BTSARIH #천연에너지 #건강소다</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>18,588</strong></div><div class="pstat">💬 <strong>158</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZSb2EeD85Z/" target="_blank">instagram.com/p/DZSb2EeD85Z</a>
 </div>
 
-<div style="height:2rem"></div>
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram</span><span class="pdate">2026-06-01</span></div>
+  <div class="ptxt">설탕 가득한 탄산음료 대신 카페인 ZERO! 저당·저열량이라 아이들에게도 안심하고 줄 수 있는 [ARIH 듀얼 바이오틱 소다]. ARIH공식계정 한달만에 115만 팔로워를 달성할 정도로 핫한 K-푸드 브랜드. BTS와 함께 기획하고 개발한 K-푸드 오늘 드디어 한국 공식 런칭!</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>10,930</strong></div><div class="pstat">💬 <strong>26</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZCjTxmJiFB/" target="_blank">instagram.com/p/DZCjTxmJiFB</a>
+</div>
 
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram 해외</span><span class="pdate">2026-06-05</span></div>
+  <div class="ptxt">BTS 參與打造的泡麵，終於在韓國也買得到！由 BTS 從企劃階段就參與打造的食品品牌 ARIH，最近正式在韓國上市了！其中最吸引目光的，就是結合泡麵與義大利麵特色的全新拌麵品。</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>8,206</strong></div><div class="pstat">💬 <strong>7</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZMAAVpAQfw/" target="_blank">instagram.com/p/DZMAAVpAQfw</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram</span><span class="pdate">2026-06-04</span></div>
+  <div class="ptxt">SUGA | ARIH ICN 공항 LED 스크린에서 ARIH 브랜드를 위한 멤버들의 사진이 전시되고 있습니다! Photos of our members for the ARIH brand are being displayed on the LED screens at ICN Airport!</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>7,132</strong></div><div class="pstat">💬 <strong>120</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZKYjNgDEnp/" target="_blank">instagram.com/p/DZKYjNgDEnp</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram 해외</span><span class="pdate">2026-06-05</span></div>
+  <div class="ptxt">Gamcheon Groove just visited the BTS THE CITY Arirang Busan Welcome Center at Busan Station! You can enjoy K-pop experiences and receive special gifts, including ARIH drinks and cup noodles that BTS participated in creating from the planning stage.</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>5,898</strong></div><div class="pstat">💬 <strong>56</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZNBdF5yHym/" target="_blank">instagram.com/p/DZNBdF5yHym</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram</span><span class="pdate">2026-06-01</span></div>
+  <div class="ptxt">#광고 미국에서 먼저 공개된 ARIH. 공식 계정도 한달만에 115만 팔로워 달성. 직접 먹어보니 모던누들은 K푸드를 글로벌 감성으로 재해석한 느낌으로 패키지부터 맛까지 트렌디했어요. BTS와 함께 개발한 브랜드라는 것도 신기.</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>4,555</strong></div><div class="pstat">💬 <strong>48</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZCtaa5pMKl/" target="_blank">instagram.com/p/DZCtaa5pMKl</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram</span><span class="pdate">2026-06-01</span></div>
+  <div class="ptxt">#광고 BTS와 함께 개발한 브랜드 'ARIH' 가 한국에도 런칭! 미국에서 첨 공개되어 한달만에 115만의 팔로워를 달성한 핫한 브랜드. 멤버들도 즐겨 먹는다니 BTS팬으로서 아리 푸드들을 먹어보니 매력적인 맛에 반하겠더라구요.</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>3,131</strong></div><div class="pstat">💬 <strong>51</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZCrfnahx27/" target="_blank">instagram.com/p/DZCrfnahx27</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram</span><span class="pdate">2026-06-07</span></div>
+  <div class="ptxt">you're missing part of the ARMY experience if you're only showing up for the concert — visit the ARIH Booth before the BTS ARIRANG WORLD TOUR concert starts and make even more core memories before stepping into the stadium!</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>2,913</strong></div><div class="pstat">💬 <strong>47</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZP-XYUsOY5/" target="_blank">instagram.com/p/DZP-XYUsOY5</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram</span><span class="pdate">2026-06-01</span></div>
+  <div class="ptxt">#광고 드디어 한국 상륙 ARIH 모던 누들 & 에너지드링크 & 소다. BTS와 함께 개발한 브랜드로 모던 누들은 넙적하고 쫄깃한 면발이 매력적! 에너지드링크는 제로슈거라 부담 없고, 소다는 저당·저칼로리로 가볍게 즐기기 좋아요.</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>2,836</strong></div><div class="pstat">💬 <strong>45</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZCP-yrzqsM/" target="_blank">instagram.com/p/DZCP-yrzqsM</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram</span><span class="pdate">2026-06-04</span></div>
+  <div class="ptxt">#EVENT ♥ 아리의 시작을 특별하게 기념한 한정 패키지가 hy 브랜드스토어에서 단독 출시. 오직 1만 set로 제작된 ARIH 한정 패키지. 포함 구성: ARIH 듀얼 바이오틱 소다 7종 · 모던 누들 2개 · ARIH 엽서.</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>2,772</strong></div><div class="pstat">💬 <strong>17</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZJo5wDjsI3/" target="_blank">instagram.com/p/DZJo5wDjsI3</a>
+</div>
+
+<p style="font-size:11.5px;font-weight:700;color:var(--sub);padding:0 16px;margin:16px 0 8px">글로벌 TOP5 (해외 계정 기준)</p>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram 해외</span><span class="pdate">2026-06-03</span></div>
+  <div class="ptxt">3년 전 BTS 멤버들이 "우리가 먹고 싶은 라면과 음료를 만들자"고 제안. "ARIH"로 바꾸는 데만 석 달이 걸렸으며, BTS의 기준이 높아 제안이 계속 거절됐다고. 맛·이름·디자인 모두 BTS의 창작물입니다.</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>3,864</strong></div><div class="pstat">💬 <strong>27</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZHfOuwD-b5/" target="_blank">instagram.com/p/DZHfOuwD-b5</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram 해외</span><span class="pdate">2026-06-07</span></div>
+  <div class="ptxt">BTS 參與企劃的泡麵，Kitto小編親自試吃！ARIH 是由 BTS 與 Paldo、HY 共同打造的品牌，以「日常中的平衡與健康」概念推出產品。Modern Noodle 結合泡麵與義大利麵特色，麵條 Q 彈有嚼勁令人印象深刻。</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>4,289</strong></div><div class="pstat">💬 <strong>6</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZSOWEFiWbO/" target="_blank">instagram.com/p/DZSOWEFiWbO</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram 해외</span><span class="pdate">2026-06-01</span></div>
+  <div class="ptxt">Trying BTS-inspired noodles from ARIH — Which flavor would you steal first? #Ari #arih #arihiscominghome #koreannoodles #arihkorea</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>4,860</strong></div><div class="pstat">💬 <strong>43</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZB7IBSha0q/" target="_blank">instagram.com/p/DZB7IBSha0q</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram 해외</span><span class="pdate">2026-06-01</span></div>
+  <div class="ptxt">ARIH (ft. BTS) is finally coming to Korea!!!!! The brand 'ARIH', co-developed with BTS, is finally launching in Korea! ARIH 공식 계정이 단 한 달만에 115만 팔로워를 달성할 정도로 핫한 브랜드예요.</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>1,684</strong></div><div class="pstat">💬 <strong>50</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZAbm0lShd4/" target="_blank">instagram.com/p/DZAbm0lShd4</a>
+</div>
+
+<div class="pc">
+  <div class="pm"><span class="badge">Instagram 해외</span><span class="pdate">2026-06-04</span></div>
+  <div class="ptxt">Yiyecek ve içecek markası ARIH için üyelerimizin tanıtım fotoğrafları reklam panolarında yer alıyor!</div>
+  <div class="pstats"><div class="pstat">❤️ <strong>2,022</strong></div><div class="pstat">💬 <strong>24</strong></div></div>
+  <a class="plink" href="https://www.instagram.com/p/DZKKJFfjPBv/" target="_blank">instagram.com/p/DZKKJFfjPBv</a>
+</div>
+
+<p style="font-size:11.5px;font-weight:700;color:var(--sub);padding:0 16px;margin:16px 0 8px">언론 기사 주요 내용 (관련도 상위 5건)</p>
+
+<div class="nc">
+  <div class="nm"><span class="badge">언론사뉴스</span><span class="ndate">2026-06-06</span></div>
+  <div class="ntitle">"컵라면이 생면 같네"… BTS 손길 닿은 '아리(ARIH)' 먹어보니</div>
+  <div class="nsumm">팔도·hy가 BTS와 함께 기획한 아리가 국내 상륙. 메가MGC커피 전국 입점 및 일본·멕시코·캐나다 등 주요 국가로 단계적 확대 계획. "자극보다는 맛과 건강, 라이프스타일의 균형을 제안하는 브랜드".</div>
+  <div class="nfooter"><span class="nsrc">MTN 머니투데이방송</span><a class="nlink" href="https://news.mtn.co.kr/news-detail/2026060615550794282" target="_blank">기사 보기 →</a></div>
+</div>
+
+<div class="nc">
+  <div class="nm"><span class="badge">언론사뉴스</span><span class="ndate">2026-06-05</span></div>
+  <div class="ntitle">팔도·hy '아리', 메가MGC커피 전국 입점… 국내 오프라인 공략 본격화</div>
+  <div class="nsumm">전국 4,300여 개 메가MGC커피 매장에 아리가 동시 입점. "다양한 연령층이 일상적으로 방문하는 생활 밀착형 채널을 통해 자연스럽게 제품을 경험할 수 있는 접점 확대가 중요".</div>
+  <div class="nfooter"><span class="nsrc">S-저널</span><a class="nlink" href="https://www.s-journal.co.kr/news/articleView.html?idxno=41588" target="_blank">기사 보기 →</a></div>
+</div>
+
+<div class="nc">
+  <div class="nm"><span class="badge">언론사뉴스</span><span class="ndate">2026-06-05</span></div>
+  <div class="ntitle">팔도·hy '아리(ARIH)', 국내 첫 기획세트 4천개 사흘 만에 완판</div>
+  <div class="nsumm">에너지드링크 7 in ONE·듀얼소다 7 in ONE 총 4,000세트가 출시 3일 만에 소진. 각 세트에는 모던 누들 2개와 브랜드 브로셔, 키링이 포함됐으며 포스트바이오틱 에너지 드링크는 당류·칼로리 제로 설계.</div>
+  <div class="nfooter"><span class="nsrc">파이낸셜투데이</span><a class="nlink" href="https://www.ftoday.co.kr/news/articleView.html?idxno=360045" target="_blank">기사 보기 →</a></div>
+</div>
+
+<div class="nc">
+  <div class="nm"><span class="badge">언론사뉴스</span><span class="ndate">2026-06-04</span></div>
+  <div class="ntitle">팔도·hy, BTS와 만든 '아리' 국내 출시… 美 월마트 흥행 이어 글로벌 공략 본격화</div>
+  <div class="nsumm">미국 월마트 출시 3일 만에 베스트셀러 배지 획득. 국내 모던 누들·에너지 드링크·소다 등 총 28종 출시. 이후 일본·멕시코·캐나다로 확장 예정.</div>
+  <div class="nfooter"><span class="nsrc">한국영농신문</span><a class="nlink" href="http://www.youngnong.co.kr/news/articleView.html?idxno=60044" target="_blank">기사 보기 →</a></div>
+</div>
+
+<div class="nc">
+  <div class="nm"><span class="badge">언론사뉴스</span><span class="ndate">2026-06-02</span></div>
+  <div class="ntitle">BTS가 만든 '라면' 나왔다…美 월마트 '완판템' 국내 출시</div>
+  <div class="nsumm">팔도·hy가 BTS와 공동 기획한 아리(ARIH) 국내 공식 출시. "단순한 식품 브랜드를 넘어 맛과 건강, 라이프스타일의 균형을 제안하는 새로운 식음료 카테고리". 국내 출시 이어 일본·멕시코·캐나다로 확대 예정.</div>
+  <div class="nfooter"><span class="nsrc">노컷뉴스</span><a class="nlink" href="http://www.nocutnews.co.kr/news/6526354" target="_blank">기사 보기 →</a></div>
+</div>
+
+<!-- FOOTER -->
+<div class="ftr">
+  <div>hy 데이터팀 · ARIH 주간 소셜 현황 보고서</div>
+  <div>분석 기간 2026-06-01 ~ 2026-06-07 &nbsp;·&nbsp; 생성 2026-06-11</div>
+  <div style="margin-top:4px;font-size:10px">데이터 출처: Sometrend Social MCP &nbsp;·&nbsp; Google Analytics 4</div>
+</div>
+
+</div><!-- /w -->
 <script>
-const DATES=["06.01","06.02","06.03","06.04","06.05","06.06","06.07"];
-const CH={
-  "인스타그램":   {c:"#e05ea0",v:[490,58,42,42,28,18,20]},
-  "네이버 블로그":{c:"#34c278",v:[46,13,11,17,28,15,18]},
-  "티스토리":     {c:"#fd79a8",v:[2,0,4,3,1,0,1]},
-  "커뮤니티":     {c:"#6c63ff",v:[23,7,9,6,49,9,10]},
-  "네이버 카페":  {c:"#00b894",v:[14,4,4,4,8,4,5]},
-  "다음 카페":    {c:"#a29bfe",v:[0,1,0,0,0,0,0]},
-  "유튜브":       {c:"#e84040",v:[22,9,3,4,2,1,3]},
-  "언론사 뉴스":  {c:"#ff9f43",v:[64,8,1,7,66,2,3]},
-  "다음 뉴스":    {c:"#00b8d9",v:[42,76,30,25,18,8,6]},
-  "네이버 뉴스":  {c:"#3b8de0",v:[33,72,32,22,14,7,8]},
-};
-const CHS=Object.keys(CH);
-const grandTotal=CHS.reduce((s,k)=>s+CH[k].v.reduce((a,b)=>a+b,0),0); // 1602
-const sortedCH=[...CHS].sort((a,b)=>CH[b].v.reduce((x,y)=>x+y,0)-CH[a].v.reduce((x,y)=>x+y,0));
-const CH_COLOR={"인스타그램":"#e05ea0","네이버 블로그":"#34c278","티스토리":"#fd79a8","커뮤니티":"#6c63ff","네이버 카페":"#00b894","다음 카페":"#a29bfe","유튜브":"#e84040","언론사 뉴스":"#ff9f43","다음 뉴스":"#00b8d9","네이버 뉴스":"#3b8de0"};
-
-// 꺾은선
-new Chart(document.getElementById("lineC"),{type:"line",data:{labels:DATES,datasets:CHS.map(k=>({label:k,data:CH[k].v,borderColor:CH[k].c,backgroundColor:CH[k].c+"18",borderWidth:1.5,pointRadius:2.5,tension:0.3}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},color:"#9a9a90"},grid:{display:false}},y:{ticks:{font:{size:10},color:"#9a9a90"},grid:{color:"rgba(0,0,0,0.05)"}}}}});
-
-
-// 꺾은선 범례
-const lLeg=document.getElementById("lineLeg");
-sortedCH.forEach(k=>{const total=CH[k].v.reduce((a,b)=>a+b,0);const el=document.createElement("span");el.className="leg-item";el.innerHTML=`<span class="dot" style="background:${CH[k].c}"></span>${k} ${total}건`;lLeg.appendChild(el);});
-
-
-// 채널×날짜 테이블
-const chTbl=document.getElementById("chTbl");
-CHS.forEach(k=>{const s=CH[k].v.reduce((a,b)=>a+b,0);const tr=document.createElement("tr");tr.innerHTML=`<td class="nowrap"><span class="dot" style="background:${CH[k].c};margin-right:4px;vertical-align:middle"></span>${k}</td>${CH[k].v.map(v=>`<td class="num">${v||"—"}</td>`).join("")}<td class="num bold">${s}</td>`;chTbl.appendChild(tr);});
-
-// 채널별 연관어
-const TODAY_ASSOC={
-  "인스타그램":{c:"#e05ea0",kws:[{w:"bts(506)",u:false},{w:"아리(463)",u:false},{w:"#아리(447)",u:true},{w:"#arih(400)",u:true},{w:"#arihiscominghome(359)",u:true},{w:"광고(338)",u:true},{w:"@hy.official.kr(306)",u:true},{w:"에너지(260)",u:false},{w:"런칭(252)",u:true},{w:"팔로워(178)",u:true}]},
-  "네이버 블로그":{c:"#34c278",kws:[{w:"bts(101)",u:false},{w:"아리(86)",u:false},{w:"라면(70)",u:false},{w:"봉골레(59)",u:true},{w:"맛(58)",u:false},{w:"모던누들(55)",u:false},{w:"파스타(42)",u:true},{w:"버터(39)",u:true},{w:"트러플불고기(34)",u:true},{w:"고추장버터(30)",u:true}]},
-  "커뮤니티":{c:"#6c63ff",kws:[{w:"bts(43)",u:false},{w:"아리(42)",u:false},{w:"팔도(32)",u:false},{w:"음료(29)",u:false},{w:"라면(29)",u:false},{w:"출시(21)",u:false},{w:"편의점(11)",u:true},{w:"캐나다(10)",u:true},{w:"멕시코(10)",u:true},{w:"온라인(13)",u:true}]},
-};
-const chAssocTbody=document.querySelector("#chAssocTbl tbody");
-Object.entries(TODAY_ASSOC).forEach(([ch,meta])=>{const tr=document.createElement("tr");const kwHtml=meta.kws.map(k=>k.u?`<span style="color:${meta.c};font-weight:600;margin-right:4px">${k.w}</span>`:`<span style="color:#9a9a90;margin-right:4px">${k.w}</span>`).join("");tr.innerHTML=`<td class="nowrap bold"><span class="dot" style="background:${meta.c};margin-right:5px;vertical-align:middle"></span>${ch}</td><td style="line-height:2">${kwHtml}</td>`;chAssocTbody.appendChild(tr);});
-
-// 일별 연관어 추이 (7채널 합산 TOP5, 인스타그램 기준)
-const TREND=[
-  {date:"06.01",items:[{w:"아리",f:393},{w:"bts",f:387},{w:"한국",f:367},{w:"#아리",f:353},{w:"출시",f:21}]},
-  {date:"06.02",items:[{w:"bts",f:30},{w:"아리",f:29},{w:"#아리",f:21},{w:"#arihiscominghome",f:16},{w:"라면",f:4}]},
-  {date:"06.03",items:[{w:"아리",f:18},{w:"bts",f:13},{w:"#아리",f:7},{w:"라면",f:6},{w:"모던누들",f:5}]},
-  {date:"06.04",items:[{w:"bts",f:25},{w:"아리",f:21},{w:"팔도",f:13},{w:"브랜드",f:11},{w:"#arih",f:10}]},
-  {date:"06.05",items:[{w:"bts",f:28},{w:"아리",f:24},{w:"메가커피",f:18},{w:"팔도",f:16},{w:"음료",f:14}]},
-  {date:"06.06",items:[{w:"아리",f:12},{w:"bts",f:10},{w:"라면",f:6},{w:"팔도",f:5},{w:"모던누들",f:4}]},
-  {date:"06.07",items:[{w:"bts",f:15},{w:"아리",f:12},{w:"라면",f:8},{w:"봉골레",f:6},{w:"팔도",f:5}]},
-];
-const tHead=document.getElementById("trendHead");
-const hr=document.createElement("tr");
-hr.innerHTML=`<th style="width:28px">순위</th>${TREND.map(d=>`<th style="min-width:72px">${d.date}</th>`).join("")}`;
-tHead.appendChild(hr);
-const tTbl=document.getElementById("trendTbl");
-for(let r=0;r<5;r++){
-  const tr=document.createElement("tr");
-  let cells=`<td class="num bold" style="white-space:nowrap">${r+1}위</td>`;
-  TREND.forEach((day,di)=>{
-    const item=day.items[r];
-    if(!item||item.f===0){cells+=`<td style="color:#c0c0b8">—</td>`;return;}
-    let cls="";
-    if(di>0){const allPrev=TREND.slice(0,di).flatMap(d=>d.items.map(x=>x.w));const pw=TREND[di-1].items.map(x=>x.w);if(!allPrev.includes(item.w)){cls="trend-new";}else if(!pw.includes(item.w)){cls="";}else{const pr=pw.indexOf(item.w);if(pr>r)cls="trend-up";}}
-    cells+=`<td style="white-space:nowrap"><span class="${cls}">${item.w}</span><br><span style="font-size:10px;color:#9a9a90">${item.f}건</span></td>`;
+'use strict';
+/* ── GA4 combo chart ── */
+(function(){
+  var L=['6/1','6/2','6/3','6/4','6/5','6/6','6/7'];
+  var S=[16641,11026,7721,8825,8305,5441,4914];
+  var U=[12664,9098,6471,7316,7020,4663,4225];
+  var V=[33126,14700,9271,10666,9820,6418,5599];
+  new Chart(document.getElementById('ga4C'),{
+    data:{
+      labels:L,
+      datasets:[
+        {type:'bar',label:'Sessions',data:S,backgroundColor:'#4A67FF',borderRadius:4,order:3},
+        {type:'line',label:'Active Users',data:U,borderColor:'#2CB67D',backgroundColor:'transparent',
+         pointBackgroundColor:'#2CB67D',pointRadius:3,tension:.35,order:2},
+        {type:'line',label:'Views',data:V,borderColor:'#F7A600',backgroundColor:'transparent',
+         pointBackgroundColor:'#F7A600',pointRadius:3,tension:.35,borderDash:[5,3],order:1}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},padding:12}},
+        tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.parsed.y.toLocaleString()}}}
+      },
+      scales:{
+        x:{grid:{display:false},ticks:{font:{size:11}}},
+        y:{grid:{color:'#EBEBEB'},ticks:{font:{size:11},callback:function(v){return v>=1000?(v/1000).toFixed(0)+'K':v}}}
+      }
+    }
   });
-  tr.innerHTML=cells;
-  tTbl.appendChild(tr);
-}
+}());
 
-// 연관어 순위 TOP 50 (7일 합산)
-const RANK=[
-  {w:"bts",f:650,ch:"인스타그램"},{w:"아리",f:591,ch:"인스타그램"},{w:"arih",f:527,ch:"인스타그램"},
-  {w:"한국",f:478,ch:"인스타그램"},{w:"#아리",f:447,ch:"인스타그램"},{w:"미국",f:440,ch:"인스타그램"},
-  {w:"브랜드",f:432,ch:"인스타그램"},{w:"#arih",f:400,ch:"인스타그램"},{w:"#arihiscominghome",f:359,ch:"인스타그램"},
-  {w:"광고",f:338,ch:"인스타그램"},{w:"@hy.official.kr",f:306,ch:"인스타그램"},{w:"에너지",f:300,ch:"인스타그램"},
-  {w:"드링크",f:298,ch:"인스타그램"},{w:"모던누들",f:294,ch:"인스타그램"},{w:"에너지드링크",f:290,ch:"인스타그램"},
-  {w:"맛",f:288,ch:"네이버 블로그"},{w:"런칭",f:252,ch:"인스타그램"},{w:"팔도",f:251,ch:"네이버 블로그"},
-  {w:"hy",f:229,ch:"인스타그램"},{w:"공식",f:203,ch:"인스타그램"},{w:"소다",f:192,ch:"인스타그램"},
-  {w:"음료",f:179,ch:"인스타그램"},{w:"팔로워",f:178,ch:"인스타그램"},{w:"월마트",f:168,ch:"인스타그램"},
-  {w:"한국야쿠르트",f:108,ch:"인스타그램"},{w:"라면",f:99,ch:"네이버 블로그"},{w:"화제",f:95,ch:"인스타그램"},
-  {w:"봉골레",f:72,ch:"네이버 블로그"},{w:"방탄소년단",f:66,ch:"네이버 블로그"},{w:"패키지",f:43,ch:"네이버 블로그"},
-  {w:"파스타",f:42,ch:"네이버 블로그"},{w:"버터",f:39,ch:"네이버 블로그"},{w:"마트",f:35,ch:"커뮤니티"},
-  {w:"트러플불고기",f:34,ch:"네이버 블로그"},{w:"라볶이",f:32,ch:"네이버 블로그"},{w:"고추장버터",f:30,ch:"네이버 블로그"},
-  {w:"간장버터",f:28,ch:"네이버 블로그"},{w:"컵라면",f:28,ch:"네이버 블로그"},{w:"야쿠르트",f:23,ch:"네이버 블로그"},
-  {w:"출시",f:21,ch:"커뮤니티"},{w:"아리음료",f:17,ch:"커뮤니티"},{w:"국내",f:13,ch:"커뮤니티"},
-  {w:"온라인",f:13,ch:"커뮤니티"},{w:"편의점",f:11,ch:"커뮤니티"},{w:"캐나다",f:10,ch:"커뮤니티"},
-  {w:"멕시코",f:10,ch:"커뮤니티"},
-];
-const rankTbody=document.querySelector("#rankTbl tbody");
-RANK.forEach((d,i)=>{const cc=CH_COLOR[d.ch]||"#888";const tr=document.createElement("tr");tr.innerHTML=`<td class="num">${i+1}</td><td class="bold">${d.w}</td><td class="num">${d.f}</td><td style="white-space:nowrap"><span style="font-size:10px;padding:1px 6px;border-radius:3px;background:${cc}18;color:${cc}">${d.ch}</span></td>`;rankTbody.appendChild(tr);});
-
-// 원문 (7일 합산 좋아요순)
-const POSTS_KR=[
-  {account:"oh******",like:18588,date:"2026.06.07",chip:"chip-ref",chipLabel:"제품제공",lang:"한국어",body:"BTS의 아리 제품 시딩 수령 후기. '제 소울푸드 라면인데 어떻게 아시고… 운동할때 건강소다 잘 챙겨먹고 좋은성적으로 보답할게요 아리 흥해라' — 스포츠 선수 계정, 건강·운동 연결 서사 #ARIH #BTSARIH",url:"https://www.instagram.com/p/DZSb2EeD85Z/"},
-  {account:"ti*********",like:10930,date:"2026.06.01",chip:"chip-ad",chipLabel:"광고",lang:"한국어",body:"런칭 광고. ARIH 듀얼 바이오틱 소다·모던누들 제품 소개. '저당·저열량이라 아이들에게도 안심' 건강 소구 중심. 미국 월마트 베스트셀러·115만 팔로워 달성 서사 포함 #아리 #arihiscominghome",url:"https://www.instagram.com/p/DZCjTxmJiFB/"},
-  {account:"lu*******",like:4555,date:"2026.06.01",chip:"chip-ad",chipLabel:"광고",lang:"한국어",body:"런칭 광고. '모던누들은 K푸드를 글로벌 감성으로 재해석한 느낌, 패키지부터 맛까지 트렌디' — 글로벌 감성·트렌디함 강조 톤 #아리 #arih #arihiscominghome",url:"https://www.instagram.com/p/DZCtaa5pMKl/"},
-  {account:"ba*****",like:3131,date:"2026.06.01",chip:"chip-ad",chipLabel:"광고",lang:"한국어",body:"런칭 광고. 'ARIH IS COMING HOME!' 서사 중심. 공식계정 115만 팔로워·BTS 공동 개발 브랜드 소개. 멤버 라이브 언급 포함 #아리 #arih #arihiscominghome",url:"https://www.instagram.com/p/DZCrfnahx27/"},
-  {account:"hy************",like:2238,date:"2026.06.04",chip:"chip-org",chipLabel:"공식",lang:"한국어",body:"hy 공식 계정. 한정 패키지(1만 set) 이벤트 공지. 소다 7종+모던누들 2개+엽서 구성 안내. 공식 계정 상위권 진입 첫 사례 #EVENT",url:"https://www.instagram.com/p/DZJo5wDjsI3/"},
-  {account:"by******",like:2226,date:"2026.06.04",chip:"chip-ad",chipLabel:"광고",lang:"한국어",body:"런칭 광고. '각 잡고 만든 프리미엄 모던 누들과 두근거림 없이 에너지 가득 채우는 에너지 드링크, 탄산감 가득한 소다' — 제품 라인업 전반 소개. 개인 원픽 듀얼바이오틱 소다 #아리 #arih",url:"https://www.instagram.com/p/DZKKJ5-zqbg/"},
-  {account:"ch**************",like:2836,date:"2026.06.01",chip:"chip-ad",chipLabel:"광고",lang:"한국어",body:"런칭 광고. 'BTS와 함께 개발, 미국에서 반응 오는 이유 알겠더라. 특히 모던누들은 K푸드를 글로벌 감성으로 재해석' — 모던누들·음료 조합 체험 위주 #arih #arihiscominghome",url:"https://www.instagram.com/p/DZCP-yrzqsM/"},
-  {account:"sw**********",like:2378,date:"2026.06.01",chip:"chip-ad",chipLabel:"광고",lang:"한국어",body:"런칭 광고. '모던 누들은 간편하면서도 깔끔하고 깊은 맛, 누구나 부담 없이 즐길 수 있는 K푸드의 매력' — 글로벌 K푸드 브랜드 서사 중심 #아리 #arih #arihiscominghome",url:"https://www.instagram.com/p/DZCEyY0R-Wb/"},
-  {account:"j_*****",like:2102,date:"2026.06.01",chip:"chip-ref",chipLabel:"협찬",lang:"한국어",body:"협찬 후기. '봉골레 누들 인스턴트 느낌이 아니라 너무 놀랐어요. 에너지드링크도 카페인 걱정없이 마시기 좋고 청량감이 엄청' — 봉골레·에너지드링크 긍정 체험 #아리 #arih",url:"https://www.instagram.com/p/DZC8Gjwyymj/"},
-  {account:"yo*********",like:2049,date:"2026.06.02",chip:"chip-ref",chipLabel:"제품제공",lang:"한국어",body:"제품 제공 후기. '레몬크레스트 맛이 가장 취향. 정식 런칭하면 내돈내산으로도 구매해볼 것 같아요' — 음료 맛 선호도 언급, 재구매 의향 표현 #아리 #ARIH",url:"https://www.instagram.com/p/DZFjh1Fy3jh/"},
-];
-const POSTS_ALL=[
-  {account:"oh******",like:18588,date:"2026.06.07",chip:"chip-ref",chipLabel:"제품제공",lang:"한국어",body:"BTS의 아리 제품입니다 챙겨주셔서 감사합니다 제 소울푸드 라면인데 어떻게아시고... 운동할때 건강소다 잘 챙겨먹고 좋은성적으로 보답할게요 아리 흥해라아아 #ARIH #BTSARIH #천연에너지 #건강소다",url:"https://www.instagram.com/p/DZSb2EeD85Z/"},
-  {account:"ti*********",like:10930,date:"2026.06.01",chip:"chip-ad",chipLabel:"광고",lang:"한국어",body:"설탕 가득한 탄산음료 대신 카페인 ZERO! 저당·저열량이라 아이들에게도 안심하고 줄 수 있는 [ARIH 듀얼 바이오틱 소다]로 시원~하게 목부터 먼저 축여주기! [ARIH 모던누들]을 볶아내면 간식 코스 완벽 해결 #아리 #arihiscominghome #whatisyourarih #arihkorea",url:"https://www.instagram.com/p/DZCjTxmJiFB/"},
-  {account:"ki******",like:8206,date:"2026.06.05",chip:"chip-global",chipLabel:"글로벌",lang:"중국어",body:"BTS 參與打造的泡麵，終於在韓國也買得到！由 BTS 從企劃階段就參與打造的食品品牌 ARIH，最近正式在韓國上市了！其中最吸引目光的，就是結合泡麵與義大利麵特色的全新拌麵。這款商品在上市前就已經在海外引發熱烈討論，甚至在美國開賣後迅速登上熱銷排行榜。如果近期要來韓國旅遊、超市的話，別忘了 ARIH 泡麵！ #BTS #ARIH #이마트",url:"https://www.instagram.com/p/DZMAAVpAQfw/"},
-  {account:"su******",like:6890,date:"2026.06.04",chip:"chip-global",chipLabel:"글로벌",lang:"터키어",body:"SUGA | ARIH ICN Havalimanı'ndaki LED ekranlarda, ARIH markası için üyelerimizin fotoğrafları yayınlanıyor! Photos of our members for the ARIH brand are being displayed on the LED screens at ICN Airport!",url:"https://www.instagram.com/p/DZKYjNgDEnp/"},
-  {account:"ga*************",like:5898,date:"2026.06.05",chip:"chip-global",chipLabel:"글로벌",lang:"영어",body:"Gamcheon Groove just visited the BTS THE CITY Arirang Busan Welcome Center at Busan Station! You can enjoy K-pop experiences, take part in fun interactive games, and even receive special gifts, including ARIH drinks and cup noodles that BTS participated in creating from the planning stage. #BTSTHECITYARIRANGBUSAN #BTS",url:"https://www.instagram.com/p/DZNBdF5yHym/"},
-];
-
-function renderPosts(posts,containerId){
-  const wrap=document.getElementById(containerId);
-  posts.forEach(p=>{
-    const card=document.createElement("div");card.className="post-card";
-    card.innerHTML=`<div class="post-meta"><span class="post-account">${p.account}</span><span class="chip ${p.chip}">${p.chipLabel}</span><span style="font-size:11px;color:#7a7a72">${p.lang}</span><span class="post-like">좋아요 <strong>${p.like.toLocaleString()}</strong></span><span class="post-date">${p.date}</span></div><p class="post-body">${p.body}</p><a class="post-link" href="${p.url}" target="_blank" rel="noopener">원문 보기 →</a>`;
-    wrap.appendChild(card);
+/* ── Channel MULTI-LINE chart ── */
+(function(){
+  var L=['6/1','6/2','6/3','6/4','6/5','6/6','6/7'];
+  var sets=[
+    {label:'인스타그램', data:[502,59,45,44,29,24,28],  color:'#4A67FF'},
+    {label:'언론사뉴스', data:[64,8,1,7,66,2,3],        color:'#2CB67D'},
+    {label:'네이버블로그',data:[46,13,11,17,28,16,19],   color:'#F7A600'},
+    {label:'커뮤니티',   data:[23,7,9,6,49,9,10],       color:'#E05A5A'},
+    {label:'유튜브',     data:[22,9,3,4,2,1,3],         color:'#9B6DFF'},
+    {label:'네이버카페', data:[14,4,4,4,8,4,5],         color:'#00B4D8'},
+    {label:'티스토리',   data:[2,0,4,3,1,0,1],          color:'#BBBBBB'}
+  ];
+  new Chart(document.getElementById('chC'),{
+    type:'line',
+    data:{
+      labels:L,
+      datasets:sets.map(function(s){
+        return {
+          label:s.label,
+          data:s.data,
+          borderColor:s.color,
+          backgroundColor:'transparent',
+          pointBackgroundColor:s.color,
+          pointRadius:4,
+          pointHoverRadius:6,
+          tension:.3,
+          borderWidth:2
+        };
+      })
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{
+          position:'bottom',
+          labels:{boxWidth:10,font:{size:10},padding:10},
+          onClick:function(e,item,legend){
+            /* toggle dataset visibility */
+            var ci=legend.chart;
+            var meta=ci.getDatasetMeta(item.datasetIndex);
+            meta.hidden=meta.hidden===null?!ci.data.datasets[item.datasetIndex].hidden:null;
+            ci.update();
+          }
+        },
+        tooltip:{
+          callbacks:{
+            label:function(c){return ' '+c.dataset.label+': '+c.parsed.y}
+          }
+        }
+      },
+      scales:{
+        x:{grid:{display:false},ticks:{font:{size:11}}},
+        y:{
+          grid:{color:'#EBEBEB'},
+          ticks:{font:{size:11}},
+          beginAtZero:true
+        }
+      }
+    }
   });
-}
-renderPosts(POSTS_KR,"posts-kr");
-renderPosts(POSTS_ALL,"posts-all");
+}());
 </script>
 </body>
 </html>
